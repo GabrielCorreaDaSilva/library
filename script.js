@@ -1,32 +1,31 @@
-const myLibrary = [
-    {
-        id: crypto.randomUUID(),
-        name: "1984",
-        autor: "George Orwell",
-        description: "A dystopian society under constant surveillance where independent thought is forbidden.",
-        pages: 328,
-        publishDate: "1949-06-08",
-        entryDate: "2026-03-21"
-    },
-    {
-        id: crypto.randomUUID(),
-        name: "The Hobbit",
-        autor: "J.R.R. Tolkien",
-        description: "A hobbit embarks on an unexpected journey to help reclaim a lost kingdom from a dragon.",
-        pages: 310,
-        publishDate: "1937-09-21",
-        entryDate: "2026-03-21"
-    },
-    {
-        id: crypto.randomUUID(),
-        name: "To Kill a Mockingbird",
-        autor: "Harper Lee",
-        description: "A young girl witnesses racial injustice in the American South through her father's legal defense.",
-        pages: 281,
-        publishDate: "1960-07-11",
-        entryDate: "2026-03-21"
-    }
-];
+const myLibrary = [];
+
+const testData = [{
+    name: "1984",
+    autor: "George Orwell",
+    description: "A dystopian society under constant surveillance where independent thought is forbidden.",
+    pages: 328,
+    publishDate: "1949-06-08",
+    entryDate: "2026-03-21"
+},
+{
+    name: "The Hobbit",
+    autor: "J.R.R. Tolkien",
+    description: "A hobbit embarks on an unexpected journey to help reclaim a lost kingdom from a dragon.",
+    pages: 310,
+    publishDate: "1937-09-21",
+    entryDate: "2026-03-21"
+},
+{
+    name: "To Kill a Mockingbird",
+    autor: "Harper Lee",
+    description: "A young girl witnesses racial injustice in the American South through her father's legal defense.",
+    pages: 281,
+    publishDate: "1960-07-11",
+    entryDate: "2026-03-21"
+}];
+
+test = () => console.log(myLibrary, testData);
 
 function Book({ name, autor, description, pages, publishDate, entryDate }) {
     this.id = crypto.randomUUID();
@@ -38,13 +37,11 @@ function Book({ name, autor, description, pages, publishDate, entryDate }) {
     this.entryDate = entryDate;
 }
 
-function addBookToLibrary(...data) {
-    const bookData = [];
-    data.forEach((e) => {
-        bookData[e[0]] = e[1];
+function addBookToLibrary(bookData) {
+    const newBook = new Book({
+        ...bookData,
+        pages: Number(bookData.pages)
     });
-    console.log(bookData);
-    const newBook = new Book(bookData);
     myLibrary.push(newBook);
 }
 
@@ -86,6 +83,9 @@ function displayLibrary() {
     return body;
 }
 
+//test
+testData.forEach(item => addBookToLibrary(item));
+
 const content = displayLibrary();
 
 const dialog = document.querySelector("dialog");
@@ -103,15 +103,12 @@ closeButton.addEventListener("click", (e) => {
     dialog.close();
 });
 
-// confirmButton.addEventListener("click", (e) => {
-//     dialog.close();
-// });
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    console.log([...formData])
-    addBookToLibrary(...formData);
+    const data = Object.fromEntries(formData)
+    addBookToLibrary(data);
     updateContent(content);
     dialog.close();
 });
