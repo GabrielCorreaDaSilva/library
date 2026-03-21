@@ -74,3 +74,25 @@ function displayLibrary() {
     library.appendChild(head);
     library.appendChild(body);
 }
+
+const dialog = document.querySelector("dialog");
+const form = document.querySelector("form")
+const showButton = document.querySelector(".new-book");
+const closeButton = document.querySelector("#close");
+const confirmButton = document.querySelector("#confirm");
+
+showButton.addEventListener("click", () => {
+    dialog.showModal();
+});
+
+closeButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    dialog.close();
+});
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    addBookToLibrary(...formData);
+    dialog.close();
+});
