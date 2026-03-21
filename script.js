@@ -28,7 +28,7 @@ const myLibrary = [
     }
 ];
 
-function Book(name, autor, description, pages, publishDate, entryDate) {
+function Book({ name, autor, description, pages, publishDate, entryDate }) {
     this.id = crypto.randomUUID();
     this.name = name;
     this.autor = autor;
@@ -38,9 +38,29 @@ function Book(name, autor, description, pages, publishDate, entryDate) {
     this.entryDate = entryDate;
 }
 
-function addBookToLibrary(name, autor, description, pages, publishDate, entryDate) {
-    const newBook = new Book(name, autor, description, pages, publishDate, entryDate);
+function addBookToLibrary(...data) {
+    const bookData = [];
+    data.forEach((e) => {
+        bookData[e[0]] = e[1];
+    });
+    console.log(bookData);
+    const newBook = new Book(bookData);
     myLibrary.push(newBook);
+}
+
+function updateContent(body) {
+    body.replaceChildren();
+    myLibrary.forEach(e => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+        <td headers="name">${e.name}</td>
+        <td headers="autor">${e.autor}</td>
+        <td headers="description">${e.description}</td>
+        <td headers="pages">${e.pages}</td>
+        <td headers="publishDate">${e.publishDate}</td>
+        <td headers="entryDate">${e.entryDate}</td>`;
+        body.appendChild(row);
+    });
 }
 
 function displayLibrary() {
@@ -60,20 +80,13 @@ function displayLibrary() {
         <th id="entryDate">Entry Date</th>
     </tr>`;
     const body = document.createElement("tbody");
-    myLibrary.forEach(e => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-        <td headers="name">${e.name}</td>
-        <td headers="autor">${e.autor}</td>
-        <td headers="description">${e.description}</td>
-        <td headers="pages">${e.pages}</td>
-        <td headers="publishDate">${e.publishDate}</td>
-        <td headers="entryDate">${e.entryDate}</td>`;
-        body.appendChild(row);
-    });
+    updateContent(body);
     library.appendChild(head);
     library.appendChild(body);
+    return body;
 }
+
+const content = displayLibrary();
 
 const dialog = document.querySelector("dialog");
 const form = document.querySelector("form")
@@ -90,9 +103,15 @@ closeButton.addEventListener("click", (e) => {
     dialog.close();
 });
 
+// confirmButton.addEventListener("click", (e) => {
+//     dialog.close();
+// });
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    console.log([...formData])
     addBookToLibrary(...formData);
+    updateContent(content);
     dialog.close();
 });

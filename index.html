@@ -17,16 +17,17 @@
         <dialog>
             <form method="post">
                 <div>
-                    <input type="text" id="name" name="name" placeholder="Name" required>
-                    <input type="text" id="autor" name="autor" placeholder="Autor" required>
-                    <input type="number" id="pages" name="pages" placeholder="Number of pages" max="9999" required>
+                    <input type="text" id="name" name="name" value="test" required>
+                    <input type="text" id="autor" name="autor" placeholder="Autor" value="test" required>
+                    <input type="number" id="pages" name="pages" placeholder="Number of pages" value="99" max="9999"
+                        required>
                 </div>
                 <div>
-                    <input type="date" id="publish-date" name="publishDate" required>
-                    <input type="date" id="entry-date" name="entryDate" required>
+                    <input type="date" id="publish-date" name="publishDate" value="2026-03-11" required>
+                    <input type="date" id="entry-date" name="entryDate" value="2026-03-11" required>
                 </div>
                 <textarea name="description" id="description" maxlength="96"
-                    placeholder="Short description(Max. 96 characters)" required></textarea>
+                    placeholder="Short description(Max. 96 characters)" required>test</textarea>
                 <div>
                     <input type="button" id="close" value="Cancel" />
                     <input type="submit" id="confirm" value="Confirm" />
