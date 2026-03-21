@@ -1,5 +1,6 @@
 const myLibrary = [];
 
+// test----------------------------------------------
 const testData = [{
     name: "1984",
     autor: "George Orwell",
@@ -26,7 +27,7 @@ const testData = [{
 }];
 
 test = () => console.log(myLibrary, testData);
-
+//---------------------------------------------------
 function Book({ name, autor, description, pages, publishDate, entryDate }) {
     this.id = crypto.randomUUID();
     this.name = name;
@@ -45,18 +46,32 @@ function addBookToLibrary(bookData) {
     myLibrary.push(newBook);
 }
 
+function removeBook(id) {
+    const target = myLibrary.findIndex(book => book.id === id);
+    myLibrary.splice(target, 1);
+}
+
 function updateContent(body) {
     body.replaceChildren();
     myLibrary.forEach(e => {
         const row = document.createElement("tr");
         row.innerHTML = `
+        <td headers="id" class="id">${e.id}</td>
         <td headers="name">${e.name}</td>
         <td headers="autor">${e.autor}</td>
         <td headers="description">${e.description}</td>
         <td headers="pages">${e.pages}</td>
         <td headers="publishDate">${e.publishDate}</td>
-        <td headers="entryDate">${e.entryDate}</td>`;
+        <td headers="entryDate">${e.entryDate}</td>
+        <td headers="delete"><button class="delete">X</button></td>
+        `;
         body.appendChild(row);
+        const btn = row.querySelector(".delete");
+        btn.addEventListener("click", (e) => {
+            const id = e.target.closest("tr").querySelector("td").textContent;
+            removeBook(id);
+            e.target.closest("tr").remove();
+        });
     });
 }
 
@@ -69,12 +84,14 @@ function displayLibrary() {
     const head = document.createElement("thead");
     head.innerHTML = `
     <tr>
+        <th id="id" class="id">Id</th>
         <th id="name">Name</th>
         <th id="autor">Autor</th>
         <th id="description">Sinopse</th>
         <th id="pages">Pages</th>
         <th id="publishDate">Publish Date</th>
         <th id="entryDate">Entry Date</th>
+        <th id="delete"></th>
     </tr>`;
     const body = document.createElement("tbody");
     updateContent(body);
@@ -112,3 +129,4 @@ form.addEventListener('submit', (e) => {
     updateContent(content);
     dialog.close();
 });
+
