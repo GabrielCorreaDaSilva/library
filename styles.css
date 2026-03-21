@@ -64,10 +64,6 @@ dialog input[type="button"]{
     padding: 12px;
 }
 
-.id {
-    display: none;
-}
-
 input,
 textarea {
     padding: 4px;

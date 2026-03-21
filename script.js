@@ -55,8 +55,8 @@ function updateContent(body) {
     body.replaceChildren();
     myLibrary.forEach(e => {
         const row = document.createElement("tr");
+        row.setAttribute("data-id", e.id);
         row.innerHTML = `
-        <td headers="id" class="id">${e.id}</td>
         <td headers="name">${e.name}</td>
         <td headers="autor">${e.autor}</td>
         <td headers="description">${e.description}</td>
@@ -68,8 +68,8 @@ function updateContent(body) {
         body.appendChild(row);
         const btn = row.querySelector(".delete");
         btn.addEventListener("click", (e) => {
-            const id = e.target.closest("tr").querySelector("td").textContent;
-            removeBook(id);
+            const row = e.target.closest("tr");
+            removeBook(row.dataset.id);
             e.target.closest("tr").remove();
         });
     });
@@ -84,7 +84,6 @@ function displayLibrary() {
     const head = document.createElement("thead");
     head.innerHTML = `
     <tr>
-        <th id="id" class="id">Id</th>
         <th id="name">Name</th>
         <th id="autor">Autor</th>
         <th id="description">Sinopse</th>
