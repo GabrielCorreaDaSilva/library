@@ -43,58 +43,42 @@ Book.prototype.changeReadStatus = function () {
     this.read = !this.read;
 }
 
-
 function addBookToLibrary(bookData) {
     const newBook = new Book({
         ...bookData,
         pages: Number(bookData.pages)
     });
     myLibrary.push(newBook);
+    return newBook;
 }
 
 const getBookId = (id) => myLibrary.findIndex(book => book.id === id);
 
 const removeBook = (id) => myLibrary.splice(getBookId(id), 1);
 
-function updateContent(body = document.querySelector("tbody")) {
-    body.replaceChildren();
-    myLibrary.forEach(e => {
-        const row = document.createElement("tr");
-        row.setAttribute("data-id", e.id);
-        row.innerHTML = `
-        <td headers="name">${e.name}</td>
-        <td headers="autor">${e.autor}</td>
-        <td headers="description">${e.description}</td>
-        <td headers="pages">${e.pages}</td>
-        <td headers="publishDate">${e.publishDate}</td>
-        <td headers="entryDate">${e.entryDate}</td>
-        <td headers="read">${e.read === true ? "Yes" : "No"}( <button class="readChange">Change</button> )</td>
+function displayBook(content, newBook, row = null) {
+    const isNew = !row;
+    row ||= document.createElement("tr");
+    row.setAttribute("data-id", newBook.id);
+    row.innerHTML = `
+        <td headers="name">${newBook.name}</td>
+        <td headers="autor">${newBook.autor}</td>
+        <td headers="description">${newBook.description}</td>
+        <td headers="pages">${newBook.pages}</td>
+        <td headers="publishDate">${newBook.publishDate}</td>
+        <td headers="entryDate">${newBook.entryDate}</td>
+        <td headers="read">${newBook.read === true ? "Yes" : "No"} <button class="read-change">Change</button> </td>
         <td headers="delete"><button class="delete">X</button></td>
-        
         `;
-        body.appendChild(row);
-        const changeReadBtn = row.querySelector(".readChange");
-        changeReadBtn.addEventListener("click", (e) => {
-            const row = e.target.closest("tr");
-            myLibrary[getBookId(row.dataset.id)].changeReadStatus();
-            updateContent();
-        });
-
-        const delBtn = row.querySelector(".delete");
-        delBtn.addEventListener("click", (e) => {
-            const row = e.target.closest("tr");
-            removeBook(row.dataset.id);
-            e.target.closest("tr").remove();
-        });
-    });
+    if (isNew) content.appendChild(row);
 }
 
 function displayLibrary() {
-    const library = document.querySelector(".library-table-container");
-    if (library.textContent) {
-        library.textContent = '';
-    }
-    console.log(library);
+    const library = document.querySelector(".library");
+    // if (library.textContent) {
+    //     library.textContent = '';
+    // }
+    // console.log(library);
     const head = document.createElement("thead");
     head.innerHTML = `
     <tr>
@@ -108,17 +92,36 @@ function displayLibrary() {
         <th id="delete"></th> 
     </tr>`;
     const body = document.createElement("tbody");
-    updateContent(body);
+    body.replaceChildren();
+    myLibrary.forEach(e => {
+        displayBook(body, e);
+    });
     library.appendChild(head);
     library.appendChild(body);
     return body;
 }
 
+const libraryTable = document.querySelector(".library");
+libraryTable.addEventListener("click", (e) => {
+
+    if (e.target.classList.contains("delete")) {
+        const row = e.target.closest("tr");
+        removeBook(row.dataset.id);
+        e.target.closest("tr").remove();
+    }
+
+    if (e.target.classList.contains("read-change")) {
+        const row = e.target.closest("tr");
+        const book = myLibrary[getBookId(row.dataset.id)];
+        book.changeReadStatus();
+        displayBook(content, book, row);
+    }
+});
+
 //test
 testData.forEach(item => addBookToLibrary(item));
-
+//
 const content = displayLibrary();
-
 const dialog = document.querySelector("dialog");
 const form = document.querySelector("form")
 const showButton = document.querySelector(".new-book");
@@ -134,13 +137,12 @@ closeButton.addEventListener("click", (e) => {
     dialog.close();
 });
 
-
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData)
-    addBookToLibrary(data);
-    updateContent(content);
+    const newBook = addBookToLibrary(data);
+    displayBook(content, newBook);
     dialog.close();
 });
 
