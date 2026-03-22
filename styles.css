@@ -74,6 +74,22 @@ textarea {
 
 }
 
+.delete {
+    height: 26px;
+    width: 26px;
+    border-radius: 16px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition-duration: 0.1s;
+    text-align: center;
+}
+
+.delete:hover {
+    background-color: gray;
+    color: white;
+}
+
 dialog input,
 dialog textarea {
     margin: 16px;

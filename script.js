@@ -38,6 +38,8 @@ function Book({ name, autor, description, pages, publishDate, entryDate }) {
     this.entryDate = entryDate;
 }
 
+
+
 function addBookToLibrary(bookData) {
     const newBook = new Book({
         ...bookData,
