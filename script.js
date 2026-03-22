@@ -36,8 +36,12 @@ function Book({ name, autor, description, pages, publishDate, entryDate }) {
     this.pages = pages;
     this.publishDate = publishDate;
     this.entryDate = entryDate;
+    this.read = false;
 }
 
+Book.prototype.changeReadStatus = function () {
+    this.read = !this.read;
+}
 
 
 function addBookToLibrary(bookData) {
@@ -48,12 +52,11 @@ function addBookToLibrary(bookData) {
     myLibrary.push(newBook);
 }
 
-function removeBook(id) {
-    const target = myLibrary.findIndex(book => book.id === id);
-    myLibrary.splice(target, 1);
-}
+const getBookId = (id) => myLibrary.findIndex(book => book.id === id);
 
-function updateContent(body) {
+const removeBook = (id) => myLibrary.splice(getBookId(id), 1);
+
+function updateContent(body = document.querySelector("tbody")) {
     body.replaceChildren();
     myLibrary.forEach(e => {
         const row = document.createElement("tr");
@@ -65,11 +68,20 @@ function updateContent(body) {
         <td headers="pages">${e.pages}</td>
         <td headers="publishDate">${e.publishDate}</td>
         <td headers="entryDate">${e.entryDate}</td>
+        <td headers="read">${e.read === true ? "Yes" : "No"}( <button class="readChange">Change</button> )</td>
         <td headers="delete"><button class="delete">X</button></td>
+        
         `;
         body.appendChild(row);
-        const btn = row.querySelector(".delete");
-        btn.addEventListener("click", (e) => {
+        const changeReadBtn = row.querySelector(".readChange");
+        changeReadBtn.addEventListener("click", (e) => {
+            const row = e.target.closest("tr");
+            myLibrary[getBookId(row.dataset.id)].changeReadStatus();
+            updateContent();
+        });
+
+        const delBtn = row.querySelector(".delete");
+        delBtn.addEventListener("click", (e) => {
             const row = e.target.closest("tr");
             removeBook(row.dataset.id);
             e.target.closest("tr").remove();
@@ -92,7 +104,8 @@ function displayLibrary() {
         <th id="pages">Pages</th>
         <th id="publishDate">Publish Date</th>
         <th id="entryDate">Entry Date</th>
-        <th id="delete"></th>
+        <th id="read">Read</th>
+        <th id="delete"></th> 
     </tr>`;
     const body = document.createElement("tbody");
     updateContent(body);
