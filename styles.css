@@ -8,27 +8,45 @@ html,body {
     background-color: rgb(46, 46, 46);
     color: white;
     height: 100%;
-    width: 100%;
+}
+
+body {
+    width: 70%;
+    margin: 0 15%;
 }
 
 .content-wrapper {
     height: 100%;
     display: flex;
     flex-direction: column;
+    padding-bottom: 50px;
+}
+
+.library,
+.new-book{
+    width: 100%;
 }
 
 .library, th, td {
     background-color: white;
     color: black;
-    border: solid black 1px;
     border-collapse: collapse;
-    margin: auto;
-
+    margin-bottom: auto;
 }
+
 th, td {
     padding: 6px 12px;
+        border: solid black 1px;
 }
 
+td:not(:nth-child(3)) {
+    white-space: nowrap;
+}
+
+td:not(:last-child){
+    border-right: none;
+}
+    
 th {
     background-color: rgb(107, 107, 107);
     color: white;
@@ -40,19 +58,66 @@ tr:nth-child(odd) td {
 
 .new-book {
     padding: 12px;
-    border-radius: 12px;
-    border: none;
     font-size: 1.2rem;
+    transition-duration: 0.1s;
+    position: fixed;
+    bottom: 0;
+    width: 70%;
 }
+
+.new-book:hover {
+    background-color: gray;
+    color: white;
+}
+
 dialog {
     margin: auto;
     padding: 50px;
-    
 }
+
+form > div {
+    display: flex;
+    justify-content: space-around;
+    margin: 40px;
+    gap: 32px;
+}
+
+.field-label-wrapper {
+    position: relative;
+}
+
+form > div:nth-child(3),
+ form label{
+    display: block;
+}
+
+
+label {
+    transition: all 0.2s ease;
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+form>div:not(:last-child) input:not(:placeholder-shown) + label,
+form>div:not(:last-child) input:focus + label,
+textarea:not(:placeholder-shown) + label,
+textarea:focus + label
+{
+    transform: translateY(-150%) scale(0.9);
+}
+
+form>div:not(:last-child) input,
+form textarea{
+    padding: 6px;
+}
+
+
 form {
     display: flex;
     flex-direction: column;
-    
 }
 
 form>div:last-child {
@@ -64,14 +129,9 @@ dialog input[type="button"]{
     padding: 12px;
 }
 
-input,
-textarea {
-    padding: 4px;
-}
-
 textarea {
     width: 100%;
-
+    height: 80px;
 }
 
 .delete {
@@ -81,7 +141,7 @@ textarea {
     border: none;
     background-color: transparent;
     cursor: pointer;
-    transition-duration: 0.1s;
+    transition: all 0.2s ease;
     text-align: center;
 }
 
@@ -92,18 +152,13 @@ textarea {
 }
 
 .read-change {
-    padding: 4px;
+    padding: 6px;
     border-radius: 12px;
-    border: 2px solid gray;
+    border: 1px solid gray;
     background-color: transparent;
     cursor: pointer;
-    transition-duration: 0.1s;
+    transition: all 0.2s ease;
     text-align: center;
-}
-
-dialog input,
-dialog textarea {
-    margin: 16px;
 }
 
 ::backdrop {

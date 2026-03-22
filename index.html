@@ -17,17 +17,34 @@
         <dialog>
             <form method="post">
                 <div>
-                    <input type="text" id="name" name="name" placeholder="Name" value="test" required>
-                    <input type="text" id="autor" name="autor" placeholder="Autor" value="test" required>
-                    <input type="number" id="pages" name="pages" placeholder="Number of pages" value="99" max="9999"
-                        required>
+                    <div class="field-label-wrapper">
+                        <input type="text" id="name" name="name" placeholder=" " value="test" required>
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="field-label-wrapper">
+                        <input type="text" id="autor" name="autor" placeholder=" " value="test" required>
+                        <label for="autor">Autor</label>
+                    </div>
+                    <div class="field-label-wrapper">
+                        <input type="number" id="pages" name="pages" placeholder=" " value="99" max="9999" required>
+                        <label for="pages">Number of pages</label>
+                    </div>
                 </div>
                 <div>
-                    <input type="date" id="publish-date" name="publishDate" value="2026-03-11" required>
-                    <input type="date" id="entry-date" name="entryDate" value="2026-03-11" required>
+                    <div class="field-label-wrapper">
+                        <input type="date" id="publish-date" name="publishDate" value="2026-03-11" required>
+                        <label for="publish-date">Publish Date </label>
+                    </div>
+                    <div class="field-label-wrapper">
+                        <input type="date" id="entry-date" name="entryDate" value="2026-03-11" required>
+                        <label for="entry-date">Entry Date </label>
+                    </div>
                 </div>
-                <textarea name="description" id="description" maxlength="96"
-                    placeholder="Short description(Max. 96 characters)" required>test</textarea>
+                <div class="field-label-wrapper">
+                    <textarea name="description" id="description" maxlength="96" placeholder=" "
+                        required>test</textarea>
+                    <label for="description">Short description(Max. 96 characters)</label>
+                </div>
                 <div>
                     <input type="button" id="close" value="Cancel" />
                     <input type="submit" id="confirm" value="Confirm" />
