@@ -19,35 +19,35 @@
                 <h1 class="title">New Book</h1>
                 <div>
                     <div class="field-label-wrapper">
-                        <input type="text" id="name" name="name" placeholder=" " value="test" required>
+                        <input type="text" name="name" id="name" placeholder=" " required>
                         <label for="name">Name</label>
                     </div>
                     <div class="field-label-wrapper">
-                        <input type="text" id="autor" name="autor" placeholder=" " value="test" required>
+                        <input type="text" name="autor" id="autor" placeholder=" " required>
                         <label for="autor">Autor</label>
                     </div>
                     <div class="field-label-wrapper">
-                        <input type="number" id="pages" name="pages" placeholder=" " value="99" max="9999" required>
+                        <input type="number" name="pages" id="pages" placeholder=" " max="9999" required>
                         <label for="pages">Number of pages</label>
                     </div>
                 </div>
-                <span></span>
+                <hr>
                 <div>
-                    <div class="field-label-wrapper">
-                        <input type="date" id="publishDate" name="publishDate" value="2026-03-11" required>
-                        <label for="publish-date">Publish Date </label>
+                    <div class=" field-label-wrapper">
+                        <input type="date" name="publishDate" id="publishDate" required>
+                        <label for="publishDate">Publish Date</label>
                     </div>
                     <div class="field-label-wrapper">
-                        <input type="date" id="entry-date" name="entryDate" value="2026-03-11" required>
-                        <label for="entryDate">Entry Date </label>
+                        <input type="date" name="entryDate" id="entryDate" required>
+                        <label for="entryDate">Entry Date</label>
                     </div>
                 </div>
-                <span></span>
+                <hr>
                 <div>
                     <div class="field-label-wrapper">
-                        <textarea name="description" id="description" maxlength="96" placeholder=" "
-                            required>test</textarea>
-                        <label for="description">Short description (Max. 96 characters)</label>
+                        <textarea name="description" id="description" minlength="12" maxlength="96" placeholder=" "
+                            required></textarea>
+                        <label for="description">Short description (Min. 12 characters Max. 96)</label>
                     </div>
                 </div>
                 <div>

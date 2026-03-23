@@ -1,7 +1,5 @@
 const myLibrary = [];
-
-// test----------------------------------------------
-const testData = [{
+const newBooks = [{
     name: "1984",
     autor: "George Orwell",
     description: "A dystopian society under constant surveillance where independent thought is forbidden.",
@@ -24,10 +22,51 @@ const testData = [{
     pages: 281,
     publishDate: "1960-07-11",
     entryDate: "2026-03-21"
-}];
+},
+{
+    name: "Brave New World",
+    autor: "Aldous Huxley",
+    description: "A futuristic society driven by technology and conditioning where individuality is suppressed.",
+    pages: 311,
+    publishDate: "1932-08-30",
+    entryDate: "2026-03-21"
+},
+{
+    name: "Fahrenheit 451",
+    autor: "Ray Bradbury",
+    description: "In a world where books are banned, a fireman begins to question the system he enforces.",
+    pages: 194,
+    publishDate: "1953-10-19",
+    entryDate: "2026-03-21"
+},
+{
+    name: "The Catcher in the Rye",
+    autor: "J.D. Salinger",
+    description: "A teenager recounts his experiences in New York City after being expelled from school.",
+    pages: 234,
+    publishDate: "1951-07-16",
+    entryDate: "2026-03-21"
+},
+{
+    name: "Moby-Dick",
+    autor: "Herman Melville",
+    description: "A sailor narrates the obsessive quest of a captain hunting a legendary white whale.",
+    pages: 635,
+    publishDate: "1851-10-18",
+    entryDate: "2026-03-21"
+},
+{
+    name: "The Great Gatsby",
+    autor: "F. Scott Fitzgerald",
+    description: "A mysterious millionaire's pursuit of love reveals the emptiness of the American Dream.",
+    pages: 180,
+    publishDate: "1925-04-10",
+    entryDate: "2026-03-21"
+}]
 
-test = () => console.log(myLibrary, testData);
-//---------------------------------------------------
+//loads sample book data
+newBooks.map(book => addBookToLibrary({ ...book }));
+
 function Book({ name, autor, description, pages, publishDate, entryDate }) {
     this.id = crypto.randomUUID();
     this.name = name;
@@ -118,9 +157,6 @@ libraryTable.addEventListener("click", (e) => {
     }
 });
 
-//test
-testData.forEach(item => addBookToLibrary(item));
-//
 const content = displayLibrary();
 const dialog = document.querySelector("dialog");
 const form = document.querySelector("form")

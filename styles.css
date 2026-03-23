@@ -10,7 +10,7 @@
 }
 
 html,body {
-    background-color: rgb(46, 46, 46);
+    background-color: rgb(34, 34, 34);
     color: white;
     height: 100%;
 }
@@ -18,6 +18,7 @@ html,body {
 body {
     width: 70%;
     margin: 0 15%;
+    background-color: var(--tertiary-color);
 }
 
 .content-wrapper {
@@ -53,7 +54,7 @@ td:not(:last-child){
 }
     
 th {
-    background-color: var(--primary-colors);
+    background-color: var(--primary-color);
     color: white;
 }
 
@@ -99,7 +100,7 @@ form>.title {
     text-align: center;
 }
 
-form span {
+form hr {
     border-top: 2px solid gray;
     border-radius: 12px;
     margin: 12px auto;
