@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 :root {
-    --primary-color: rgb(107, 107, 107);
-    --secondary-color: rgb(218, 217, 217);
+    --primary-color: #6B6B6B;
+    --secondary-color:  #DADADA;
     --tertiary-color: #434343;
 }
 
@@ -18,7 +18,7 @@ html,body {
 body {
     width: 70%;
     margin: 0 15%;
-    background-color: var(--tertiary-color);
+    background-color: var(--secondary-color);
 }
 
 .content-wrapper {
@@ -54,7 +54,7 @@ td:not(:last-child){
 }
     
 th {
-    background-color: var(--primary-color);
+    background-color: var(--tertiary-color);
     color: white;
 }
 
@@ -75,6 +75,16 @@ tr:nth-child(odd) td {
 .new-book:hover {
     background-color: var(--tertiary-colors);
     color: white;
+}
+
+.new-book{
+    background-image: linear-gradient(to top, var(--tertiary-color), #292929);
+    color: white;
+}
+
+.new-book:hover{
+    background-image: linear-gradient(to top, #292929, var(--tertiary-color) );
+    opacity: 0.9;
 }
 
 dialog {
@@ -188,7 +198,7 @@ form>div:last-child {
 dialog input[type="submit"],
 dialog input[type="button"]{
     padding: 16px 22px;
-    background-image: linear-gradient(to top, #434343, #292929);
+    background-image: linear-gradient(to top, var(--tertiary-color), #292929);
     color: white;
     border: none;
     border-radius: 12px;
@@ -219,7 +229,7 @@ dialog input[type="button"]:hover{
 
 .delete:hover,
 .read-change:hover{
-    background-color: gray;
+    background-color: var(--tertiary-color);
     color: white;
 }
 
