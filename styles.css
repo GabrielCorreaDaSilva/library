@@ -42,7 +42,7 @@ body {
 
 th, td {
     padding: 6px 12px;
-        border: solid black 1px;
+    border: none;
 }
 
 td:not(:nth-child(3)) {
@@ -204,10 +204,6 @@ dialog input[type="button"]:hover{
 .field-label-wrapper textarea {
     width: 100%;
     height: 80px;
-}
-
-form> div:last-child {
-    width: 100%;
 }
 
 .delete {
