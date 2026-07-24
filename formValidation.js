@@ -3,10 +3,10 @@ export function createValidator(form) {
 
     const getErrorTypeMessages = (input) => {
         const type = input.id;
+
         const COMMOM_ERRORS = {
-            length: "incorrect length",
             empty: "Must not be empty",
-            size: `The input needs to be with ${input.minLength} to ${input.maxLength} characters`,
+            size: `The input needs to be at least ${input.minLength} `,
         };
 
         const ERROR_MESSAGES_BY_TYPE = {
@@ -20,10 +20,6 @@ export function createValidator(form) {
             },
             text: {
                 ...COMMOM_ERRORS,
-            },
-            number: {
-                ...COMMOM_ERRORS,
-                size: `The input needs to be from ${input.min} to ${input.max}`,
             },
             "repeat-password": {
                 ...COMMOM_ERRORS,
@@ -43,12 +39,15 @@ export function createValidator(form) {
         if ("empty" in errorList && value.trim() === "") {
             return "empty";
         }
-        if (
-            "size" in errorList &&
-            (input.maxLength > 0 || input.minLength >= 0) &&
-            (value.length > input.maxLength || value.length < input.minLength)
-        ) {
-            return "size";
+        if ("size" in errorList) {
+            const validateSize = (input) => {
+                const hasMinLength = input.maxLength > 0;
+                const lowerThanMinLength =
+                    hasMinLength && value.length < input.minLength;
+
+                return !lowerThanMinLength;
+            };
+            return validateSize(input) ? null : "size";
         }
         if ("pattern" in errorList && validity.patternMismatch) {
             return "pattern";
@@ -71,7 +70,6 @@ export function createValidator(form) {
             errorMessageDisplay.classList.add("error");
             errorMessageDisplay.dataset.for = input.id;
             errorMessageDisplay.style.minWidth = `${input.getBoundingClientRect().width}px`;
-            // input.insertAdjacentElement("afterend", errorMessageDisplay);
             input.closest("div").append(errorMessageDisplay);
             return errorMessageDisplay;
         };

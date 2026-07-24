@@ -129,6 +129,14 @@ form > div {
     gap: 32px;
 }
 
+form > div .field-label-wrapper {
+    flex: 1;
+}
+
+.field-label-wrapper input {
+    width: 100%;
+}
+
 .field-label-wrapper {
     position: relative;
 }
