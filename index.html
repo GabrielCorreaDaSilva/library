@@ -15,7 +15,7 @@
         </table>
         <button class="new-book">New Book</button>
         <dialog>
-            <form method="post">
+            <form method="post" novalidate>
                 <h1 class="title">New Book</h1>
                 <hr>
                 <div>
@@ -46,7 +46,7 @@
                 <hr>
                 <div>
                     <div class="field-label-wrapper">
-                        <textarea name="description" id="description" minlength="12" maxlength="96" placeholder=" "
+                        <textarea type="text "name="description" id="description" minlength="12" maxlength="96" placeholder=" "
                             required></textarea>
                         <label for="description">Short description (Min. 12 characters Max. 96)</label>
                     </div>

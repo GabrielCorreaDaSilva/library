@@ -1,4 +1,4 @@
-export function addValidation(form) {
+export function createValidator(form) {
     form.addEventListener("submit", (e) => e.preventDefault());
 
     const getErrorTypeMessages = (input) => {
@@ -17,6 +17,13 @@ export function addValidation(form) {
             password: {
                 ...COMMOM_ERRORS,
                 strength: "Password is to weak",
+            },
+            text: {
+                ...COMMOM_ERRORS,
+            },
+            number: {
+                ...COMMOM_ERRORS,
+                size: `The input needs to be from ${input.min} to ${input.max}`,
             },
             "repeat-password": {
                 ...COMMOM_ERRORS,
@@ -38,6 +45,7 @@ export function addValidation(form) {
         }
         if (
             "size" in errorList &&
+            (input.maxLength > 0 || input.minLength >= 0) &&
             (value.length > input.maxLength || value.length < input.minLength)
         ) {
             return "size";
@@ -95,12 +103,15 @@ export function addValidation(form) {
         }
     }
 
-    form.addEventListener("input", (e) => {
-        if (e.target.closest("input")) handleValidation(e.target);
-    });
-    form.addEventListener("submit", (e) => {
-        form.querySelectorAll("input").forEach((input) =>
-            handleValidation(input),
-        );
-    });
+    return {
+        validateEveryInputInForm: () => {
+            form.querySelectorAll("input").forEach((input) => {
+                if (input.type === "submit" || input.type === "button") return;
+                handleValidation(input);
+            });
+        },
+        validateInput: (element) => {
+            if (element.closest("input")) handleValidation(element);
+        },
+    };
 }

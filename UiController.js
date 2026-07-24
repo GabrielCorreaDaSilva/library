@@ -1,11 +1,10 @@
 export function displayLibrary({
     sampleData,
-    addValidation,
     Library,
     formController,
 }) {
-    const bookList = document.querySelector(".library");
     const library = new Library();
+    const bookList = document.querySelector(".library");
     if (sampleData) {
         sampleData.forEach(book => library?.addBookToLibrary(book));
     }
@@ -43,5 +42,5 @@ export function displayLibrary({
             library.displayBook(body, book, row);
         }
     });
-    formController(body, library, addValidation);
+    formController(body, library);
 }
