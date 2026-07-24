@@ -5,7 +5,7 @@ export function createValidator(form) {
         const type = input.id;
         const COMMOM_ERRORS = {
             length: "incorrect length",
-            empty: "must not be empty",
+            empty: "Must not be empty",
             size: `The input needs to be with ${input.minLength} to ${input.maxLength} characters`,
         };
 
@@ -71,7 +71,8 @@ export function createValidator(form) {
             errorMessageDisplay.classList.add("error");
             errorMessageDisplay.dataset.for = input.id;
             errorMessageDisplay.style.minWidth = `${input.getBoundingClientRect().width}px`;
-            input.insertAdjacentElement("afterend", errorMessageDisplay);
+            // input.insertAdjacentElement("afterend", errorMessageDisplay);
+            input.closest("div").append(errorMessageDisplay);
             return errorMessageDisplay;
         };
         const display =
@@ -104,14 +105,8 @@ export function createValidator(form) {
     }
 
     return {
-        validateEveryInputInForm: () => {
-            form.querySelectorAll("input").forEach((input) => {
-                if (input.type === "submit" || input.type === "button") return;
-                handleValidation(input);
-            });
-        },
-        validateInput: (element) => {
-            if (element.closest("input")) handleValidation(element);
+        validateInput: (input) => {
+            if (input) handleValidation(input);
         },
     };
 }

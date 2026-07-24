@@ -14,9 +14,10 @@ export function formController(body, library, createValidator) {
         dialog.close();
     });
     form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        validator.validateEveryInputInForm();
+        const targets = form.querySelectorAll("input[type=text],input[type=date],input[type=number], textarea");
+        targets.forEach(validator.validateInput);
         if (!form.checkValidity()) return;
+        e.preventDefault();
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
         const newBook = library.addBookToLibrary(data);
@@ -24,9 +25,11 @@ export function formController(body, library, createValidator) {
         dialog.close();
     });
     form.addEventListener("input", (e) => {
-        e.preventDefault();
-        form.querySelectorAll(
+        const target = e.target.closest(
             "input[type=text],input[type=date],input[type=number], textarea",
-        ).forEach(validator.validateInput);
+        );
+        if (target) {
+            validator.validateInput(target);
+        }
     });
 }

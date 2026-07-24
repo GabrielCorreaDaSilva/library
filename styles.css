@@ -4,12 +4,14 @@
     box-sizing: border-box;
 }
 :root {
-    --primary-color: #6B6B6B;
-    --secondary-color:  #DADADA;
+    --primary-color: #6b6b6b;
+    --secondary-color: #dadada;
     --tertiary-color: #434343;
+    --invalid-red: rgb(192, 6, 6);
 }
 
-html,body {
+html,
+body {
     background-color: rgb(34, 34, 34);
     color: white;
     height: 100%;
@@ -29,18 +31,21 @@ body {
 }
 
 .library,
-.new-book{
+.new-book {
     width: 100%;
 }
 
-.library, th, td {
+.library,
+th,
+td {
     background-color: white;
     color: black;
     border-collapse: collapse;
     margin-bottom: auto;
 }
 
-th, td {
+th,
+td {
     padding: 6px 12px;
     border: none;
 }
@@ -49,17 +54,17 @@ td:not(:nth-child(3)) {
     white-space: nowrap;
 }
 
-td:not(:last-child){
+td:not(:last-child) {
     border-right: none;
 }
-    
+
 th {
     background-color: var(--tertiary-color);
     color: white;
 }
 
 tr:nth-child(odd) td {
-  background-color: var(--secondary-color);
+    background-color: var(--secondary-color);
 }
 
 .new-book {
@@ -77,13 +82,13 @@ tr:nth-child(odd) td {
     color: white;
 }
 
-.new-book{
+.new-book {
     background-image: linear-gradient(to top, var(--tertiary-color), #292929);
     color: white;
 }
 
-.new-book:hover{
-    background-image: linear-gradient(to top, #292929, var(--tertiary-color) );
+.new-book:hover {
+    background-image: linear-gradient(to top, #292929, var(--tertiary-color));
     opacity: 0.9;
 }
 
@@ -104,7 +109,7 @@ form {
     justify-content: center;
 }
 
-form>.title {
+form > .title {
     font-size: 3rem;
     margin-bottom: 22px;
     text-align: center;
@@ -129,12 +134,12 @@ form > div {
 }
 
 form > div:nth-of-type(3),
- form label{
+form label {
     display: block;
     width: 100%;
 }
 
-form> div:last-child{
+form > div:last-child {
     width: 100%;
 }
 
@@ -150,13 +155,12 @@ label {
 .field-label-wrapper input:not(:placeholder-shown) + label,
 .field-label-wrapper input:focus + label,
 textarea:not(:placeholder-shown) + label,
-textarea:focus + label
-{
+textarea:focus + label {
     transform: translateY(-150%) scale(1);
 }
 
 .field-label-wrapper input,
-.field-label-wrapper textarea{
+.field-label-wrapper textarea {
     padding: 6px;
     border-radius: 6px;
     appearance: none;
@@ -167,7 +171,7 @@ textarea:focus + label
 .field-label-wrapper input:user-invalid + label,
 .field-label-wrapper textarea:user-invalid + label,
 .field-label-wrapper input:user-invalid,
-.field-label-wrapper:user-invalid {
+.field-label-wrapper textarea:user-invalid {
     color: rgb(192, 6, 6);
     border-color: rgb(192, 6, 6);
 }
@@ -181,14 +185,13 @@ textarea:focus + label
 }
 
 .field-label-wrapper input:focus + label,
-.field-label-wrapper>textarea:focus + label,
-.field-label-wrapper>input:focus,
-.field-label-wrapper>textarea:focus
-{
+.field-label-wrapper > textarea:focus + label,
+.field-label-wrapper > input:focus,
+.field-label-wrapper > textarea:focus {
     color: black;
 }
 
-form>div:last-child {
+form > div:last-child {
     align-self: center;
     margin: 0;
     padding: 0;
@@ -196,7 +199,7 @@ form>div:last-child {
 }
 
 dialog input[type="submit"],
-dialog input[type="button"]{
+dialog input[type="button"] {
     padding: 16px 22px;
     background-image: linear-gradient(to top, var(--tertiary-color), #292929);
     color: white;
@@ -206,8 +209,8 @@ dialog input[type="button"]{
 }
 
 dialog input[type="submit"]:hover,
-dialog input[type="button"]:hover{
-    background-image: linear-gradient(to top, #292929, var(--tertiary-color) );
+dialog input[type="button"]:hover {
+    background-image: linear-gradient(to top, #292929, var(--tertiary-color));
     opacity: 0.9;
 }
 
@@ -228,7 +231,7 @@ dialog input[type="button"]:hover{
 }
 
 .delete:hover,
-.read-change:hover{
+.read-change:hover {
     background-color: var(--tertiary-color);
     color: white;
 }
@@ -246,4 +249,27 @@ dialog input[type="button"]:hover{
 ::backdrop {
     background-color: black;
     opacity: 0.5;
+}
+
+.error {
+    background-color: transparent;
+    color: white;
+    margin: 0;
+    padding: 8px 0;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    display: none;
+    height: 0;
+    position: absolute;
+    white-space: nowrap;
+    bottom: -34px;
+}
+
+.visible {
+    display: block;
+    height: auto;
+    background-color: var(--invalid-red);
+    z-index: 10;
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 0, 0.526);
 }
